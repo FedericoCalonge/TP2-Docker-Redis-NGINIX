@@ -1,28 +1,48 @@
 package ar.edu.undav.noescalapp.service;
 
 import ar.edu.undav.noescalapp.domain.Resource;
+import ar.edu.undav.noescalapp.domain.ResourceRepository;
+import com.martensigwart.fakeload.FakeLoad;
+import com.martensigwart.fakeload.FakeLoadExecutor;
+import com.martensigwart.fakeload.FakeLoads;
+import com.martensigwart.fakeload.MemoryUnit;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class ResourceService {
 
-    private static final int HARDNESS_HARD = 20;
+    private static final int HARDNESS_HARD = 5;
+    private static final int HARDNESS_MEDIUM = 2;
+    private static final int HARDNESS_EASY = 1;
 
     private static Integer lastId = 0;
     private static final Map<Integer, Resource> PERSISTENCE_MAP = new HashMap<>();
 
+    private ResourceRepository resourceRepository;
+
+    public ResourceService(ResourceRepository repository) {
+        this.resourceRepository = repository;
+    }
+
     public Resource save(String name) {
         Integer lastIdAndIncrement = this.getLastIdAndIncrement();
         Resource resource = new Resource(lastIdAndIncrement, name);
-        this.workHard();
-        PERSISTENCE_MAP.put(lastIdAndIncrement, resource);
+        this.work(HARDNESS_HARD);
+        this.resourceRepository.save(resource);
+        this.resourceRepository.delete(resource);
         return resource;
     }
 
     public Resource getResource(Integer id) {
-        this.work(5);
+        this.work(HARDNESS_EASY);
         Resource resource = PERSISTENCE_MAP.get(id);
         if (resource == null) {
             throw new IllegalArgumentException("Recurso no existente");
@@ -31,7 +51,7 @@ public class ResourceService {
     }
 
     public List<Resource> getResources() {
-        this.work(10);
+        this.work(HARDNESS_MEDIUM);
         return new ArrayList<>(PERSISTENCE_MAP.values());
     }
 
@@ -42,13 +62,28 @@ public class ResourceService {
     private void work(int hardness) {
         Long random =  Math.round(Math.random() * hardness);
         try {
-            Thread.sleep(random * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            FakeLoad fakeload = FakeLoads.create()
+                    .lasting(random, TimeUnit.SECONDS)
+                    .withCpu(5)
+                    .withMemory(1, MemoryUnit.MB);
+            FakeLoadExecutor executor = NoEscalappFakeLoadExecutor.newNoEscalappFakeExecutor();
+            executor.execute(fakeload);
+        } catch (Exception exception) {
+
+            try {
+                System.out.println("No podemos fakear más carga. Solo dormimos.");
+                Thread.sleep(random);
+                throw exception;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
-    private void workHard() {
-        work(HARDNESS_HARD);
+
+    @PostConstruct
+    public void initialize() {
+        this.save("resource0");
+        this.save("resource1");
     }
 
 }

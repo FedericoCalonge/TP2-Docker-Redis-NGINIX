@@ -1,6 +1,6 @@
 # TP2-Docker-RabbitMQ-Scaling
 
->Trabajo Práctico 2 -RabbitMQ & Scaling- para la materia Programación Distribuida 2 (PD2), de la Universidad Nacional de Avellaneda.  
+>Trabajo Práctico 2 -Docker & RabbitMQ & Scaling- para la materia Programación Distribuida 2 (PD2), de la Universidad Nacional de Avellaneda.  
 >Profesor: Juan Lagostena.  
 >Autor: Federico Calonge.  
 
