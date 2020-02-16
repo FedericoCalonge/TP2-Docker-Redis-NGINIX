@@ -22,7 +22,7 @@ Test hechos con JUnit y uso de TRAVIS CI.
 Leer el archivo "Consigna.pdf".  
 
 ### Uso
-Main a ejecutar: en ....  
+Main a ejecutar: en /TP2....  
 Estando parados en /TP2/TP2... utilizar el siguiente comando de Maven para que compile el proyecto y luego lo ejecute:   
 >mvn compile exec:java -Dexec.mainClass="DOMmain"
 
