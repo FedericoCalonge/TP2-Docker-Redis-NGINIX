@@ -1,6 +1,6 @@
-# TP2-Docker-RabbitMQ-Scaling
+# TP2-Docker-Redis-NGINIX-RabbitMQ-Scaling
 
->Trabajo Práctico 2 -Docker & RabbitMQ & Scaling- para la materia Programación Distribuida 2 (PD2), de la Universidad Nacional de Avellaneda.  
+>Trabajo Práctico 2 -Docker & Redis & NGINIX & RabbitMQ & Scaling- para la materia Programación Distribuida 2 (PD2), de la Universidad Nacional de Avellaneda.  
 >Profesor: Juan Lagostena.  
 >Autor: Federico Calonge.  
 
@@ -15,8 +15,7 @@ Test hechos con JUnit y uso de TRAVIS CI.
 -JAVA 11  
 -Maven  
 -Docker  
--Redis  
--Sentinel  
+-Redis Sentinel  
 -Rabbit MQ  
 
 ### Consigna
