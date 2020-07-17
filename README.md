@@ -1,14 +1,12 @@
-# TP2-Docker-Redis-NGINIX-RabbitMQ-Scaling
+# TP2-Docker-Redis-NGINIX-RabbitMQ-Scaling - NOT YET FINISHED
 
 >Trabajo Práctico 2 -Docker & Redis & NGINIX & RabbitMQ & Scaling- para la materia Programación Distribuida 2 (PD2), de la Universidad Nacional de Avellaneda.  
 >Profesor: Juan Lagostena.  
 >Autor: Federico Calonge.  
 
 ### About
-Nos dan la aplicacion Aplicación NO escalable (ver carpeta "no-escalapp-master") y debemos hacerla escalable (osea........). La solución está en la carpeta "escala-app".  
-Lo que hace la aplicación es simplemente........
+Nos proveen una aplicacion Aplicación NO escalable (carpeta "no-escalapp-master") y debemos hacerla escalable.
 Para esto además tuvimos que cumplir una serie de requisitos (dichos requerimientos estan en el archivo "Consigna.pdf".)  
--------PONER EL USO DE JMETER Y POSTMAN--------  
 Test hechos con JUnit y uso de TRAVIS CI.  
 
 ### Requirements
