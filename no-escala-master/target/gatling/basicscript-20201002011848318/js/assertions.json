@@ -1,0 +1,10 @@
+{
+  "simulation": "performance.BasicScript",
+  "simulationId": "basicscript",
+  "start": 1601601528318,
+  "description": "",
+  "scenarios": ["Scenario Name"],
+  "assertions": [
+
+  ]
+}

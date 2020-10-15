@@ -1,0 +1,26 @@
+version: "3.7"
+services:
+  api:
+    image: maven:3-jdk-8
+    container_name: no-sescalapp-api
+    volumes:
+      - .:/app 
+    ports:
+      - "8080:8080"
+    working_dir: /app
+    command: mvn spring-boot:run
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    network_mode: host
+    depends_on:
+      - redis
+
+  redis:
+    image: redis
+    container_name: no-escalapp-redis
+    ports:
+      - "6379:6379"
+    network_mode: host

@@ -1,0 +1,8 @@
+/app/src/main/java/ar/edu/undav/noescalapp/domain/Resource.java
+/app/src/main/java/ar/edu/undav/noescalapp/controller/ResourceController.java
+/app/src/main/java/ar/edu/undav/noescalapp/NoescalappApplication.java
+/app/src/main/java/ar/edu/undav/noescalapp/config/SpringConfig.java
+/app/src/main/java/ar/edu/undav/noescalapp/config/RedisConfig.java
+/app/src/main/java/ar/edu/undav/noescalapp/service/NoEscalappFakeLoadExecutor.java
+/app/src/main/java/ar/edu/undav/noescalapp/domain/ResourceRepository.java
+/app/src/main/java/ar/edu/undav/noescalapp/service/ResourceService.java

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: ar.edu.undav.noescalapp.controller.ResourceControllerTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 2.947 s - in ar.edu.undav.noescalapp.controller.ResourceControllerTest
