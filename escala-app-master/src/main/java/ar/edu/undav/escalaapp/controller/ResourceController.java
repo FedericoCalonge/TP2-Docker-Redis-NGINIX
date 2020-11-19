@@ -1,34 +1,34 @@
 package ar.edu.undav.escalaapp.controller;
 
 import ar.edu.undav.escalaapp.domain.Resource;
-import ar.edu.undav.escalaapp.service.ResourceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
+import ar.edu.undav.escalaapp.RedisRepository.ResourceRepository;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "only-resource")
 public class ResourceController {
 
-    private ResourceService resourceService;
+    //Ahora con Redis:
+    private ResourceRepository rr;
 
-    public ResourceController(ResourceService resourceService) {
-        this.resourceService = resourceService;
+    public ResourceController(ResourceRepository rr) {
+        this.rr = rr;
     }
 
     @PostMapping("/{name}")
     public ResponseEntity<Integer> saveResource(@PathVariable String name) {
-        Resource resource = resourceService.save(name);
-        return ResponseEntity.status(HttpStatus.CREATED).body(resource.getId());
+        rr.saveResource(name);
+        //Devolvemos en el body el numero de registros cargados ya que el recurso guardado se guardò con ese ID:
+        return ResponseEntity.status(HttpStatus.CREATED).body(rr.getNumberRecordsLoaded());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Resource> getResource(@PathVariable Integer id) {
-        try {
-            return ResponseEntity.ok(resourceService.getResource(id));
+    public ResponseEntity<String> getResource(@PathVariable Integer id) {
+        try { return ResponseEntity.ok(rr.getByID(id));
         } catch (IllegalArgumentException exception) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, String.format("Resource de id %d no encontrado", id), exception);
@@ -40,7 +40,16 @@ public class ResourceController {
 
     @GetMapping
     public ResponseEntity<List<Resource>> getAllResources() {
-        return ResponseEntity.ok(resourceService.getResources());
+        return ResponseEntity.ok(rr.getAllByID());
     }
+
+    @GetMapping("/Number_Records")
+    public ResponseEntity<Integer> getNumberRecords() {
+        return ResponseEntity.status(HttpStatus.CREATED).body(rr.getNumberRecordsLoaded());
+        //SI me dice que tiene 6 registros es porque tenemos del ID 0-5 cargados.
+    }
+
+
+
 
 }
