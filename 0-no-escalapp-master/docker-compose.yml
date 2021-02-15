@@ -2,7 +2,7 @@ version: "3.7"
 services:
   api:
     image: maven:3-jdk-8
-    container_name: no-escala-app-api
+    container_name: noescala-app-api
     volumes:
       - .:/app
     ports:

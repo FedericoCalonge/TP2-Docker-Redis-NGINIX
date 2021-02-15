@@ -3,7 +3,6 @@ package performance
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import org.springframework.http.HttpStatus
-
 import scala.concurrent.duration._
 
 class BasicScript extends Simulation {
