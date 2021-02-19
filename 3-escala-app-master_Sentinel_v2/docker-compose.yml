@@ -1,0 +1,55 @@
+version: "3.7"
+services:
+  api:
+    image: maven:3-jdk-8
+    container_name: "escala-app-api-con-sentinel_V2"
+    volumes:
+      - ".:/app"
+    ports:
+      - "8082:8080"
+    working_dir: /app
+    command: mvn spring-boot:run
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    depends_on:
+      - redis-master
+      - redis-slave
+      - redis-sentinel
+
+  redis-master:
+    container_name: "redis-master_V2"
+    image: redis:6
+    ports:
+      - "6379:6379"
+    command: "redis-server /etc/redis/redis.conf"
+    volumes:
+      - "./master.conf:/etc/redis/redis.conf"
+
+  redis-slave:
+    container_name: "redis-slave_V2"
+    image: redis:6
+    ports:
+      - "6380:6380"
+    command: "redis-server /etc/redis/redis.conf"
+    volumes:
+      - "./slave.conf:/etc/redis/redis.conf"
+    depends_on:
+      - redis-master
+
+  redis-sentinel:
+    container_name: 'redis-sentinel_V2'
+    image: redis
+    ports:
+      - "26379:26379"
+    command: "redis-server /etc/redis/sentinel.conf --sentinel"
+    volumes:
+      - "./sentinel.conf:/etc/redis/sentinel.conf"
+    depends_on:
+      - redis-master
+      - redis-slave
+
+
+

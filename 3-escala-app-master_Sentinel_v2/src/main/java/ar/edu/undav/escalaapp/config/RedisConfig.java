@@ -21,23 +21,24 @@ public class RedisConfig {
     }
 
     //Anterior sin Sentinel (funciona):
-    /*
+
     @Bean
     public LettuceConnectionFactory redisConnectionFactory() {
-        return new LettuceConnectionFactory(new RedisStandaloneConfiguration("redis-master", 6379));
+        return new LettuceConnectionFactory(new RedisStandaloneConfiguration("redis-master_V2", 6379));
     }
-    */
 
+/*
     @Bean
     public LettuceConnectionFactory redisConnectionFactory() {
         RedisSentinelConfiguration sentinelConfig = new RedisSentinelConfiguration()
                 .master("undavmaster")
                 .sentinel("127.0.0.1", 26379);
         return new LettuceConnectionFactory(sentinelConfig);
-        }
+    }
+    */
 }
 
-    //Ejemplo original con Sentinel:
+//Ejemplo original con Sentinel:
     /*
     @Bean
     public RedisConnectionFactory lettuceConnectionFactory() {
