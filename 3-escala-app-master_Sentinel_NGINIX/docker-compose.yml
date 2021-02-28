@@ -2,7 +2,7 @@ version: "3.7"
 services:
   api:
     image: maven:3-jdk-8
-    container_name: "escala-app-api-con-sentinel"
+    container_name: "escala-app-api-con-sentinel-y-NGINIX"
     volumes:
       - .:/app
     ports:
@@ -26,33 +26,33 @@ services:
 
   redis-master:
     image: redis:6
-    container_name: "redis-master"
+    container_name: "redis-master_V2"
   replica_1:
     image: redis:6
-    container_name: "redis-replica_1"
+    container_name: "redis-replica_1_V2"
     command: redis-server --replicaof redis-master 6379
     links:
       - redis-master
   replica_2:
     image: redis:6
-    container_name: "redis-replica_2"
+    container_name: "redis-replica_2_V2"
     command: redis-server --replicaof redis-master 6379
     links:
       - redis-master
   replica_3:
     image: redis:6
-    container_name: "redis-replica_3"
+    container_name: "redis-replica_3_V2"
     command: redis-server --replicaof redis-master 6379
     links:
       - redis-master
   replica_4:
     image: redis:6
-    container_name: "redis-replica_4"
+    container_name: "redis-replica_4_V2"
     command: redis-server --replicaof redis-master 6379
     links:
       - redis-master
   sentinel_1:
-    container_name: "redis-sentinel_1"
+    container_name: "redis-sentinel_1_V2"
     build: sentinel
     ports:
       - "26379:26379"
@@ -63,7 +63,7 @@ services:
       - replica_3
       - replica_4
   sentinel_2:
-    container_name: "redis-sentinel_2"
+    container_name: "redis-sentinel_2_V2"
     build: sentinel
     ports:
       - "26380:26380"
@@ -74,7 +74,7 @@ services:
       - replica_3
       - replica_4
   sentinel_3:
-    container_name: "redis-sentinel_3"
+    container_name: "redis-sentinel_3_V2"
     build: sentinel
     ports:
       - "26381:26381"
