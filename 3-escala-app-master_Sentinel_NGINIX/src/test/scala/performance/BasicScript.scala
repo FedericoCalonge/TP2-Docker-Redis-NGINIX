@@ -8,7 +8,7 @@ import scala.concurrent.duration._
 class BasicScript extends Simulation {
 
     val httpProtocol = http
-      .baseUrl("http://localhost:8080/only-resource") // Root for all relative URLs
+      .baseUrl("http://localhost/only-resource") // Root for all relative URLs
       .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8") // Common headers
       .acceptEncodingHeader("gzip, deflate")
       .acceptLanguageHeader("en-US,en;q=0.5")
@@ -27,16 +27,6 @@ class BasicScript extends Simulation {
       .pause(10)
       .exec(http("request_2")
         .get("/0").check(status.is(HttpStatus.OK.value())))
-
-  //NO (Ver porque) - Sequential scenarios:
-  //setUp(scn.inject(atOnceUsers(100))
-  // .andThen(scn2.inject(atOnceUsers(200)))
-  // ).protocols(httpProtocol)
-
-  //SI - Concurrent scenarios:
-  //setUp(scn.inject(atOnceUsers(100)),
-  // scn2.inject(atOnceUsers(200))
-  // ).protocols(httpProtocol)
 
   //Setup of the 2 Concurrent Scenarios (Not Sequencial):
     setUp(

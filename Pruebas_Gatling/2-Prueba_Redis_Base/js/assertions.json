@@ -1,0 +1,10 @@
+{
+  "simulation": "performance.BasicScript",
+  "simulationId": "basicscript",
+  "start": 1614651984140,
+  "description": "",
+  "scenarios": ["Friendly and CLosed Scenario", "Not Friendly and Open Scenario"],
+  "assertions": [
+
+  ]
+}
