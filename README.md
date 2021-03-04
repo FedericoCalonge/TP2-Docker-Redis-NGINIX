@@ -17,7 +17,7 @@ Las demás carpetas del repo son versiones posteriores de la app implementando d
 * 3-escala-app-master_Sentinel_NGINIX: Añadimos NGINX como balanceador de carga y proxy reverso para actuar en los servidores Apache Tomcat presentes en 2 aplicaciones "clones", las cuales estan conectadas a Redis-Sentinel. Esto lo hacemos para obtener un mejor manejo de los requests y una mejor performance.
 
 Para entender la teoría de escalabilidad, virtualización, la teoría de las herramientas utilizadas en este Trabajo Práctico y visualizar gráficamente cómo fue escalando la app, mirar: 
->Informe Teoria.pdf
+>Informe-Conceptos_Teoricos_y_Herramientas_Utilizadas.pdf
 >
 
 ### Requirements
