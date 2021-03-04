@@ -1,7 +1,9 @@
 # TP2-Docker-Redis-NGINIX
 
 >Trabajo Práctico 2 -Docker & Redis & NGINX- para la materia Programación Distribuida 2 (PD2), de la Universidad Nacional de Avellaneda.  
+>
 >Profesor: Juan Lagostena. 
+>
 >Autor: Federico Calonge.
 >
 
@@ -33,8 +35,9 @@ Este script realiza múltiples GET para obtener los usuarios con ID "0" y con ID
 >
 Los resultados de esta prueba están en el archivo HTML ubicado en:
 >Pruebas_Gatling/1_Prueba_2_Escenarios_NO_escala_app/index.html.
->
 
+Observando este html vemos que se obtuvieron múltiples KO luego de unos segundos de envío de requests, ya que nuestra app colapsó y por lo tanto no es escalable.
+>
 ### Testeando la app con Gatling:
 Como primera instancia, para testear la app con Gatling, debemos ubicarnos en la carpeta root de nuestra app no escalable y levantar el contenedor con el flag compatibility activado:
 
@@ -51,7 +54,7 @@ Luego, ejecutamos el script de Gatling que ya está configurado en el pom.xml de
     > ./mvnw gatling:test
 
 Al finalizar, nos indicará el archivo donde se generó el reporte HTML con la información detallada de todos los requests realizados y el colapso de nuestra app.
-Este archivo como mencionamos previamente lo encontramos en:
+Este archivo, como mencionamos previamente, lo encontramos en:
 >Pruebas_Gatling/1_Prueba_2_Escenarios_NO_escala_app/index.html.
 >
 
@@ -67,7 +70,7 @@ Cada una de estas versiones se ejecuta de la misma manera... nos ubicamos en cad
 
     > docker-compose --compatibility up
 
-No hace falta ejecutar ningún comando más.
+No hace falta ejecutar ningún comando adicional.
 >
 
 ### Entry points: ¿Cómo hacer un GET y un POST en cada una de las versiones?
@@ -78,11 +81,12 @@ Los puertos de acceso para las versiones son:
 * Puerto 8082: para las primeras 3 versiones (0-no-escalapp-master, 1-escala-app-master_Redis, 2-escala-app-master_Sentinel).
 * Puerto 80: para la última version con NGINX como balanceador (3-escala-app-master_Sentinel_NGINIX).
 
-De esta manera podemos realizar GETs y POSTs cambiando los PUERTOACCESO por los mencionados anteriormente para cada app de la siguiente forma:
+De esta manera, podemos realizar GETs y POSTs a las siguientes URLs (cambiando los PUERTOACCESO por los mencionados anteriormente para cada app):
 > GET user con ID "1": http://localhost:PUERTOACCESO/only-resource/1
-> GET all users:  http://localhost:PUERTOACCESO/only-resource
+> 
+> GET all users:  http://localhost:PUERTOACCESO/only-resource 
+> 
 > POST usuario con nombre "Fede": http://localhost:PUERTOACCESO/only-resource/Federicoli
->
 
 ### ¿Cómo verificar que Redis Sentinel funciona correctamente? (para las últimas 2 versiones de la app)
 
@@ -107,6 +111,7 @@ Y nuevamente nos fijamos los roles de cada instancia con '>INFO replication': no
 >
 Además, para asegurarnos que se hayan guardado los datos correctamente en cada uno de los nodos, podemos correr estos comandos de Redis:
 >KEYS *
+>
 >HGETALL*  
 >
 
@@ -119,5 +124,5 @@ Los HTML de cada uno de estos tests para cada versión de la app están ubicados
 >
 
 ### Mejoras
-  -Utilizar Swagger para documentar la API.
-  -Realizar pruebas más exhaustivas con Gatling generando KO en las apps y evaluar nuevamente los resultados.
+* Utilizar Swagger para documentar la API.
+* Realizar pruebas más exhaustivas con Gatling generando KO en las apps y evaluar nuevamente los resultados.
