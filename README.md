@@ -119,8 +119,8 @@ Además, para asegurarnos que se hayan guardado los datos correctamente en cada 
 
 Observando los resultados de los test realizados con Gatling para cada versión de nuestra app, observamos que a medida que realizamos más mejoras, los tiempos de respuesta mejoraron.
 >
-Los HTML de cada uno de estos tests para cada versión de la app están ubicados en:
->Pruebas_Gatling
+Los HTML de cada uno de los resultados de estos tests para cada versión de la app están ubicados en:
+>Pruebas_Gatling/VERSION_APP/index.html
 >
 
 ### Mejoras
