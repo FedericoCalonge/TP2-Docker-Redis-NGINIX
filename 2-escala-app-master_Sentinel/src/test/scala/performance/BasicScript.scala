@@ -29,17 +29,17 @@ class BasicScript extends Simulation {
         .get("/0").check(status.is(HttpStatus.OK.value())))
 
   //Setup of the 2 Concurrent Scenarios (Not Sequencial):
-    setUp(
-          scn.inject(atOnceUsers(100)),       //Friendly.
-          scn2.inject(                        //Not Friendly.
-                  //nothingFor(4 seconds),                                    // Pause for 4 sec.
-                  atOnceUsers(10),                                            // Injects 10 users at once.
-                  rampUsers(10) during (10 seconds),                          // Injects 10 users distributed evenly on a time window of 10 sec. of duration.
-                  constantUsersPerSec(5) during (10 seconds),                 // constantUsersPerSec(rate) during(duration): Injects users at a constant rate, defined in users per second, during a given duration. Users will be injected at regular intervals.
-                  //constantUsersPerSec(10) during (10 seconds) randomized,   // constantUsersPerSec(rate) during(duration) randomized: Injects users at a constant rate, defined in users per second, during a given duration. Users will be injected at randomized intervals.
-                  rampUsersPerSec(5) to 20 during (10 seconds),               // rampUsersPerSec(rate1) to (rate2) during(duration): Injects users from starting rate to target rate, defined in users per second, during a given duration. Users will be injected at regular intervals.
-                  //rampUsersPerSec(10) to 20 during (10 seconds) randomized, // rampUsersPerSec(rate1) to(rate2) during(duration) randomized: Injects users from starting rate to target rate, defined in users per second, during a given duration. Users will be injected at randomized intervals.
-                  heavisideUsers(10) during (10 seconds)                      // heavisideUsers(nbUsers) during(duration): Injects a given number of users following a smooth approximation of the heaviside step function stretched to a given duration.
-          )
-    ).protocols(httpProtocol)
+  setUp(
+    scn.inject(atOnceUsers(100)),       //Friendly.
+    scn2.inject(                        //Not Friendly.
+      //nothingFor(4 seconds),                                    // Pause for 4 sec.
+      atOnceUsers(10),                                            // Injects 10 users at once.
+      rampUsers(10) during (10 seconds),                          // Injects 10 users distributed evenly on a time window of 10 sec. of duration.
+      constantUsersPerSec(5) during (10 seconds),                 // constantUsersPerSec(rate) during(duration): Injects users at a constant rate, defined in users per second, during a given duration. Users will be injected at regular intervals.
+      //constantUsersPerSec(10) during (10 seconds) randomized,   // constantUsersPerSec(rate) during(duration) randomized: Injects users at a constant rate, defined in users per second, during a given duration. Users will be injected at randomized intervals.
+      rampUsersPerSec(5) to 20 during (10 seconds),               // rampUsersPerSec(rate1) to (rate2) during(duration): Injects users from starting rate to target rate, defined in users per second, during a given duration. Users will be injected at regular intervals.
+      //rampUsersPerSec(10) to 20 during (10 seconds) randomized, // rampUsersPerSec(rate1) to(rate2) during(duration) randomized: Injects users from starting rate to target rate, defined in users per second, during a given duration. Users will be injected at randomized intervals.
+      heavisideUsers(10) during (10 seconds)                      // heavisideUsers(nbUsers) during(duration): Injects a given number of users following a smooth approximation of the heaviside step function stretched to a given duration.
+    )
+  ).protocols(httpProtocol)
 }
